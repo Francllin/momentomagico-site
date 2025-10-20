@@ -1,0 +1,9 @@
+# docker-compose.yml
+services:
+  site:
+    build: .
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./:/usr/src/site:ro
+    restart: unless-stopped

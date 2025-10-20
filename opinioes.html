@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Opiniões | O Momento Mágico</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Poppins", system-ui, -apple-system, Segoe UI, Roboto,
+          Arial, sans-serif;
+        background: #000;
+        color: #fff;
+      }
+
+      .section-title {
+        font-weight: 700;
+        text-align: center;
+        margin-bottom: 12px;
+      }
+      .brand-text {
+        font-weight: 600;
+      }
+      .btn-gold {
+        background: linear-gradient(90deg, #b99728, #e3c45c);
+        border: none;
+        color: #111;
+        font-weight: 600;
+        border-radius: 0.75rem;
+        box-shadow: 0 6px 18px rgba(227, 196, 92, 0.18);
+      }
+      .btn-gold:hover {
+        filter: brightness(0.96);
+      }
+      .btn-outline-light {
+        border-width: 2px;
+        border-radius: 0.75rem;
+      }
+
+      .award-banner {
+        max-width: 1100px;
+        margin: 0 auto 22px;
+        position: relative;
+        overflow: hidden;
+        border: 1px solid rgba(227, 196, 92, 0.35);
+        border-radius: 16px;
+        background: radial-gradient(
+            1000px 400px at -10% -20%,
+            rgba(227, 196, 92, 0.12),
+            transparent 60%
+          ),
+          radial-gradient(
+            900px 380px at 110% 120%,
+            rgba(227, 196, 92, 0.12),
+            transparent 60%
+          ),
+          linear-gradient(
+            180deg,
+            rgba(255, 255, 255, 0.03),
+            rgba(255, 255, 255, 0.01)
+          );
+        box-shadow: 0 12px 36px rgba(0, 0, 0, 0.55),
+          inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+      }
+      .award-banner .wrap {
+        display: grid;
+        grid-template-columns: 1fr 360px;
+        gap: 18px;
+        align-items: center;
+        padding: 22px;
+      }
+      .award-copy h1 {
+        font-size: clamp(1.35rem, 2.4vw, 1.8rem);
+        margin: 0 0 6px;
+      }
+      .award-copy p {
+        margin: 0;
+        opacity: 0.95;
+      }
+      .award-stats {
+        margin-top: 10px;
+        font-weight: 600;
+        color: #e3c45c;
+      }
+      .award-card {
+        background: #0b0b0b;
+        border: 1px solid rgba(227, 196, 92, 0.35);
+        border-radius: 14px;
+        overflow: hidden;
+        box-shadow: 0 8px 24px rgba(227, 196, 92, 0.15);
+      }
+      .award-card img {
+        display: block;
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+        background: #fff;
+      }
+      @media (max-width: 991.98px) {
+        .award-banner .wrap {
+          grid-template-columns: 1fr;
+          gap: 14px;
+        }
+      }
+
+      .opiniao-preview {
+        max-width: 980px;
+        margin: 20px auto;
+        background: #111;
+        border: 1px solid #2a2a2a;
+        border-radius: 10px;
+        overflow: hidden;
+      }
+      .opiniao-preview .top {
+        padding: 18px 20px;
+        border-bottom: 1px solid #2a2a2a;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+      }
+      .opiniao-preview .url {
+        color: #bbb;
+        font-size: 0.95rem;
+        word-break: break-all;
+      }
+      .opiniao-preview .frame-look {
+        min-height: 220px;
+        background: linear-gradient(180deg, #0d0d0d, #000);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #ddd;
+        text-align: center;
+        padding: 16px 24px;
+      }
+      .opiniao-preview .frame-look p {
+        max-width: 640px;
+        margin: 0 auto;
+        opacity: 0.9;
+      }
+
+      /* Carrossel premium */
+      #opiniaoCarousel.carousel {
+        max-width: 1100px;
+        margin: 28px auto;
+        border-radius: 16px;
+        overflow: hidden;
+        border: 1px solid rgba(227, 196, 92, 0.35);
+        background: #050505;
+        box-shadow: 0 16px 44px rgba(0, 0, 0, 0.55);
+      }
+      #opiniaoCarousel.carousel.carousel-fade .carousel-item {
+        transition: opacity 0.6s ease;
+        opacity: 0;
+      }
+      #opiniaoCarousel.carousel.carousel-fade .carousel-item.active {
+        opacity: 1;
+      }
+
+      .carousel-item {
+        position: relative;
+        background: #000;
+      }
+      .carousel-item::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+          1200px 480px at 50% 90%,
+          rgba(0, 0, 0, 0),
+          rgba(0, 0, 0, 0.55)
+        );
+        pointer-events: none;
+      }
+      .carousel-item .item-inner {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        padding: 0;
+      }
+      .carousel-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        image-rendering: auto;
+        backface-visibility: hidden;
+        transform: translateZ(0);
+      }
+      @media (min-width: 992px) {
+        .carousel-item {
+          min-height: 540px;
+        }
+      }
+      @media (max-width: 991.98px) {
+        .carousel-item {
+          min-height: 380px;
+        }
+      }
+      @media (max-width: 575.98px) {
+        .carousel-item {
+          min-height: 300px;
+        }
+      }
+
+      /* Controles e indicadores com miniaturas */
+      .carousel-control-prev,
+      .carousel-control-next {
+        width: 56px;
+      }
+      .carousel-control-prev:hover,
+      .carousel-control-next:hover {
+        filter: brightness(1.1);
+      }
+      .carousel-indicators {
+        margin: 0;
+        padding: 10px 12px;
+        background: linear-gradient(
+          180deg,
+          rgba(0, 0, 0, 0.35),
+          rgba(0, 0, 0, 0.55)
+        );
+        gap: 8px;
+      }
+      .carousel-indicators [data-bs-target] {
+        width: 56px;
+        height: 36px;
+        border-radius: 6px;
+        border: 1px solid rgba(255, 255, 255, 0.35);
+        background: #222;
+        background-size: cover;
+        background-position: center;
+        opacity: 0.6;
+        transition: opacity 0.2s ease, transform 0.2s ease,
+          border-color 0.2s ease;
+      }
+      .carousel-indicators [data-bs-target].active {
+        opacity: 1;
+        border-color: #e3c45c;
+        transform: translateY(-1px);
+        box-shadow: 0 6px 14px rgba(227, 196, 92, 0.25);
+      }
+
+      /* Zoom elegante no clique (lightbox) */
+      .viewer-backdrop {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.85);
+        backdrop-filter: blur(2px);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 1080;
+      }
+      .viewer-backdrop.show {
+        display: flex;
+      }
+      .viewer-img {
+        max-width: 95vw;
+        max-height: 90vh;
+        border-radius: 12px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+      }
+      .viewer-close {
+        position: fixed;
+        top: 14px;
+        right: 14px;
+      }
+
+      .empty-hint {
+        max-width: 980px;
+        margin: 28px auto;
+        color: #bbb;
+        text-align: center;
+      }
+    </style>
+    <link rel="stylesheet" href="style.css?v=1.2.0" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-black fixed-top shadow">
+      <div class="container">
+                <a
+          class="navbar-brand d-flex align-items-center magic-disney"
+          href="#home"
+        >
+          <img
+            src="images/logomomentomagico.png"
+            alt="Momento Mágico"
+            height="60"
+            class="me-2"
+          />
+          <span class="brand-text">Momento Mágico</span>
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div
+          class="collapse navbar-collapse justify-content-end"
+          id="navbarNav"
+        >
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html#services">Serviços</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="index.html#packages">Pacotes</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="index.html#contact">Contato</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <main class="container" style="padding-top: 110px; padding-bottom: 40px">
+      <section class="award-banner mb-3">
+        <div class="wrap">
+          <div class="award-copy">
+            <h1>Opiniões de clientes</h1>
+            <p>
+              Confira avaliações reais de quem viveu a experiência do Momento
+              Mágico. O conteúdo oficial está no Casamentos.com.br e pode ser
+              aberto em nova aba.
+            </p>
+            <div class="award-stats">
+              Avaliação média 5,0 • Empresa premiada Casamentos Awards 2025
+            </div>
+            <div class="mt-3 d-flex gap-2 flex-wrap">
+              <a
+                class="btn btn-gold"
+                href="https://www.casamentos.com.br/animacao-festa/momento-magico--e430402/opinioes"
+                target="_blank"
+                rel="noopener"
+                >Abrir no Casamentos.com</a
+              >
+              <a
+                class="btn btn-outline-light"
+                href="https://www.casamentos.com.br/animacao-festa/momento-magico--e430402"
+                target="_blank"
+                rel="noopener"
+                >Ver perfil</a
+              >
+            </div>
+          </div>
+          <figure class="award-card m-0">
+            <img
+              src="images/selo-casamentos-2025.jpg"
+              alt="Casamentos.com.br Awards 2025 — Momento Mágico"
+            />
+          </figure>
+        </div>
+      </section>
+
+      <div class="opiniao-preview">
+        <div class="top">
+          <div class="url">
+            https://www.casamentos.com.br/animacao-festa/momento-magico--e430402/opinioes
+          </div>
+          <a
+            class="btn btn-gold"
+            href="https://www.casamentos.com.br/animacao-festa/momento-magico--e430402/opinioes"
+            target="_blank"
+            rel="noopener"
+            >Abrir avaliações</a
+          >
+        </div>
+        <div class="frame-look">
+          <p>
+            O site do Casamentos.com não permite ser exibido dentro de outros
+            sites por questões de segurança. Clique em “Abrir avaliações” para
+            ver o conteúdo oficial em nova aba.
+          </p>
+        </div>
+      </div>
+
+      <div id="opiniaoCarousel" class="carousel slide carousel-fade">
+        <div class="carousel-indicators" id="carouselIndicators"></div>
+        <div class="carousel-inner" id="carouselInner"></div>
+        <button
+          class="carousel-control-prev"
+          type="button"
+          data-bs-target="#opiniaoCarousel"
+          data-bs-slide="prev"
+          aria-label="Anterior"
+        >
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        </button>
+        <button
+          class="carousel-control-next"
+          type="button"
+          data-bs-target="#opiniaoCarousel"
+          data-bs-slide="next"
+          aria-label="Próximo"
+        >
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        </button>
+      </div>
+
+      <div id="emptyHint" class="empty-hint d-none">
+        Nenhuma imagem encontrada em <code>images/opnioes</code>. Use .webp ou
+        .jpg de boa resolução.
+      </div>
+    </main>
+
+    <!-- Lightbox simples -->
+    <div class="viewer-backdrop" id="viewer">
+      <button class="btn btn-outline-light viewer-close" id="viewerClose">
+        Fechar
+      </button>
+      <img class="viewer-img" id="viewerImg" alt="" />
+    </div>
+
+    <footer class="bg-dark text-center text-light py-3">
+      <small>© 2025 O Momento Mágico - Todos os direitos reservados</small>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      const BASE_FOLDER = "images/opnioes/";
+
+      async function fetchManifest() {
+        try {
+          const r = await fetch(BASE_FOLDER + "manifest.json", {
+            cache: "no-store",
+          });
+          if (r.ok) {
+            const arr = await r.json();
+            if (Array.isArray(arr) && arr.length) {
+              return arr.map(
+                (name) =>
+                  new URL(name, location.origin + "/" + BASE_FOLDER).href
+              );
+            }
+          }
+        } catch (e) {}
+        return null;
+      }
+
+      async function scrapeAutoIndex() {
+        try {
+          const res = await fetch(BASE_FOLDER, { cache: "no-store" });
+          if (!res.ok) return [];
+          const html = await res.text();
+          const doc = new DOMParser().parseFromString(html, "text/html");
+          const anchors = Array.from(doc.querySelectorAll("a[href]"));
+          const files = anchors
+            .map((a) => a.getAttribute("href"))
+            .filter(
+              (h) =>
+                !!h &&
+                !h.startsWith("?") &&
+                !h.startsWith("/") &&
+                !h.startsWith("../")
+            )
+            .filter((h) => /\.(jpe?g|png|gif|webp)$/i.test(h))
+            .map((h) => new URL(h, res.url).href);
+          return files;
+        } catch (e) {
+          return [];
+        }
+      }
+
+      async function listImages() {
+        const m = await fetchManifest();
+        if (m && m.length) return m;
+        return await scrapeAutoIndex();
+      }
+
+      // cria miniaturas nos indicadores e melhora "qualidade visual" com preload do próximo slide
+      function buildCarousel(urls) {
+        const inner = document.getElementById("carouselInner");
+        const ind = document.getElementById("carouselIndicators");
+        inner.innerHTML = "";
+        ind.innerHTML = "";
+
+        urls.forEach((src, i) => {
+          const item = document.createElement("div");
+          item.className = "carousel-item" + (i === 0 ? " active" : "");
+
+          const wrap = document.createElement("div");
+          wrap.className = "item-inner";
+
+          const img = document.createElement("img");
+          img.src = src;
+          img.alt = "Opiniões - imagem " + (i + 1);
+          img.loading = i === 0 ? "eager" : "lazy";
+          if (i === 0) img.setAttribute("fetchpriority", "high");
+          img.decoding = "async";
+          img.className = "d-block";
+          wrap.appendChild(img);
+          item.appendChild(wrap);
+          inner.appendChild(item);
+
+          // indicador com miniatura
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.setAttribute("data-bs-target", "#opiniaoCarousel");
+          btn.setAttribute("data-bs-slide-to", String(i));
+          btn.style.backgroundImage = `url('${src}')`;
+          if (i === 0) btn.className = "active";
+          btn.ariaLabel = "Slide " + (i + 1);
+          ind.appendChild(btn);
+        });
+
+        // preload simples do próximo slide quando o atual entrar
+        const el = document.getElementById("opiniaoCarousel");
+        el.addEventListener("slid.bs.carousel", (ev) => {
+          const nextIndex = (ev.to + 1) % urls.length;
+          const next = inner.querySelectorAll(".carousel-item img")[nextIndex];
+          if (next && next.loading === "lazy") {
+            const link = document.createElement("link");
+            link.rel = "preload";
+            link.as = "image";
+            link.href = next.src;
+            document.head.appendChild(link);
+          }
+        });
+
+        // lightbox
+        inner.addEventListener("click", (e) => {
+          const img = e.target.closest("img");
+          if (!img) return;
+          const viewer = document.getElementById("viewer");
+          const vimg = document.getElementById("viewerImg");
+          vimg.src = img.src;
+          viewer.classList.add("show");
+        });
+      }
+
+      (async () => {
+        const imgs = await listImages();
+        imgs.sort((a, b) => a.localeCompare(b));
+        buildCarousel(imgs);
+
+        const el = document.getElementById("opiniaoCarousel");
+        const prev = bootstrap.Carousel.getInstance(el);
+        if (prev) prev.dispose();
+        const instance = new bootstrap.Carousel(el, {
+          interval: imgs.length > 1 ? 4500 : false,
+          pause: false,
+          touch: true,
+          wrap: true,
+        });
+        if (imgs.length > 1) instance.cycle();
+
+        // fechar lightbox
+        document.getElementById("viewer").addEventListener("click", (e) => {
+          if (e.target.id === "viewer" || e.target.id === "viewerClose") {
+            e.currentTarget.classList.remove("show");
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>
